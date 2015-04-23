@@ -1,17 +1,9 @@
 #!/bin/bash
 
 cat <<EOF
-GitLab is installed in /home/git/gitlab.
+Configure and start GitLab by running the following command:
 
-Here at the GitLab environment information:
-
-`cat /home/git/.gitlabinfo`
-EOF
-
-cat <<EOF
-PostgreSQL is configured for user "git" without password.
-To continue the installation, read the documentation to
-configue Domain Names and Email at https://www.scaleway.com/docs/how-to-configure-and-use-gitlab-instantapp
+sudo gitlab-ctl reconfigure
 EOF
 
 cat <<EOF
