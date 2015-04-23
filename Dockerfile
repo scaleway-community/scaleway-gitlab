@@ -14,8 +14,7 @@ RUN apt-get -q update                   \
 # Install gitlab
 
 RUN wget https://s3-eu-west-1.amazonaws.com/downloads-packages/raspberry-pi/gitlab_7.9.0-omnibus.pi-1_armhf.deb \
-  && dpkg -i gitlab_7.9.0-omnibus.pi-1_armhf.deb \
-  && gitlab-ctl reconfigure
+  && dpkg -i gitlab_7.9.0-omnibus.pi-1_armhf.deb
 
 # Patch rootfs
 
