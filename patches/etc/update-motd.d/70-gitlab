@@ -1,0 +1,19 @@
+#!/bin/bash
+
+cat <<EOF
+GitLab is installed in /home/git/gitlab.
+
+Here at the GitLab environment information:
+
+`cat /home/git/.gitlabinfo`
+EOF
+
+cat <<EOF
+PostgreSQL is configured for user "git" without password.
+To continue the installation, read the documentation to
+configue Domain Names and Email at https://www.scaleway.com/docs/how-to-configure-and-use-gitlab-instantapp
+EOF
+
+cat <<EOF
+You can hide this message on the next connection by deleting the $0 file.
+EOF

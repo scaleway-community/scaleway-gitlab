@@ -4,7 +4,7 @@ VERSION =		latest
 VERSION_ALIASES =	14.10 14 latest utopic 7.10
 TITLE =			GitLab
 DESCRIPTION =		GitLab
-SOURCE_URL =		https://github.com/scaleway/image-app-scaleway
+SOURCE_URL =		https://github.com/scaleway/image-app-gitlab
 
 
 ## Image tools  (https://github.com/scaleway/image-tools)

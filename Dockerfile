@@ -1,4 +1,4 @@
-## -*- docker-image-name: "armbuild/scw-app-docker:latest" -*-
+## -*- docker-image-name: "armbuild/scw-app-gitlab:latest" -*-
 FROM armbuild/scw-distrib-ubuntu:utopic
 MAINTAINER Scaleway <opensource@scaleway.com> (@scaleway)
 
@@ -107,6 +107,10 @@ RUN cd /home/git/gitlab \
   && cp lib/support/nginx/gitlab /etc/nginx/sites-available/gitlab \
   && ln -s /etc/nginx/sites-available/gitlab /etc/nginx/sites-enabled/gitlab \
   && rm /etc/nginx/sites-enabled/default
+
+# Patch rootfs
+
+ADD ./patches/etc/ /etc/
 
 # Clean rootfs from image-builder
 
