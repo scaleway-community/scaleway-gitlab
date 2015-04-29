@@ -23,10 +23,3 @@ Build and write the image to /dev/nbd1 (see [documentation](https://www.scaleway
     $ make install
 
 Full list of commands available at: [scaleway/image-tools](https://github.com/scaleway/image-tools/tree/master#commands)
-
-Test
-----
-
-On a running instance:
-
-    $ SCRIPT=$(mktemp); curl -s https://raw.githubusercontent.com/scaleway/image-app-gitlab/master/test.bash > $SCRIPT; bash $SCRIPT
