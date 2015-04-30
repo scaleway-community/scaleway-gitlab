@@ -1,0 +1,5 @@
+#!/bin/bash
+
+gitlab-ctl reconfigure &> /dev/null
+gitlab-ctl reconfigure &> /dev/null
+sed -i s/gitlab-reconfigure.*//g /etc/rc.local
