@@ -1,5 +1,5 @@
 ## -*- docker-image-name: "armbuild/scw-app-gitlab:latest" -*-
-FROM armbuild/scw-distrib-ubuntu:utopic
+FROM armbuild/scw-distrib-ubuntu:trusty
 MAINTAINER Scaleway <opensource@scaleway.com> (@scaleway)
 
 # Prepare rootfs for image-builder
