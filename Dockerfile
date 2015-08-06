@@ -8,10 +8,12 @@ RUN /usr/local/sbin/builder-enter
 
 
 # Install packages
-RUN apt-get -q update                   \
+RUN curl -sL https://deb.nodesource.com/setup | sudo bash - \
+ && apt-get -q update                   \
  && apt-get --force-yes -y -qq upgrade  \
  && apt-get --force-yes install -y -q   \
-         postfix
+         postfix \
+         nodejs
 
 
 # Install gitlab
@@ -19,6 +21,9 @@ RUN wget -q -O gitlab.deb https://downloads-packages.s3.amazonaws.com/raspberry-
  && dpkg -i gitlab.deb \
  && rm -f gitlab.deb
 
+# Override gitlab node binary
+RUN  mv /opt/gitlab/embedded/bin/node /opt/gitlab/embedded/bin/node.old \
+  && ln -s /usr/bin/node /opt/gitlab/embedded/bin/node
 
 RUN echo "kernel.shmall = 262144" >> /etc/sysctl.conf
 RUN echo "kernel.shmmax = 1073741824" >> /etc/sysctl.conf
