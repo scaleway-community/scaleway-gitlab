@@ -9,21 +9,16 @@ RUN /usr/local/sbin/builder-enter
 
 # Install packages
 RUN curl -sL https://deb.nodesource.com/setup | sudo bash - \
+ && curl https://packages.gitlab.com/gpg.key | apt-key add - \
  && apt-get -q update                   \
  && apt-get --force-yes -y -qq upgrade  \
  && apt-get --force-yes install -y -q   \
-         postfix \
-         nodejs
-
+    curl openssh-server ca-certificates postfix apt-transport-https
 
 # Install gitlab
-RUN wget -q -O gitlab.deb https://downloads-packages.s3.amazonaws.com/raspberry-pi/gitlab-ce_7.12.0~omnibus%2B20150622131235-1_armhf.deb \
- && dpkg -i gitlab.deb \
- && rm -f gitlab.deb
-
-# Override gitlab node binary
-RUN  mv /opt/gitlab/embedded/bin/node /opt/gitlab/embedded/bin/node.old \
-  && ln -s /usr/bin/node /opt/gitlab/embedded/bin/node
+RUN curl -o /etc/apt/sources.list.d/gitlab_ce.list "https://packages.gitlab.com/install/repositories/gitlab/raspberry-pi2/config_file.list?os=debian&dist=wheezy" \
+  && apt-get -q update \
+  && apt-get install gitlab-ce
 
 RUN echo "kernel.shmall = 262144" >> /etc/sysctl.conf
 RUN echo "kernel.shmmax = 1073741824" >> /etc/sysctl.conf
@@ -35,4 +30,3 @@ ADD ./patches/usr/sbin/ /usr/sbin/
 
 # Clean rootfs from image-builder
 RUN /usr/local/sbin/builder-leave
-
