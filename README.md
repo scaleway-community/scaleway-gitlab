@@ -5,6 +5,8 @@ Scripts to build the official GitLab image on Scaleway
 
 This image is built using [Image Tools](https://github.com/scaleway/image-tools) and depends on the official [Ubuntu](https://github.com/scaleway/image-ubuntu) image.
 
+![](https://about.gitlab.com/images/press/logo/wm_no_bg.svg)
+
 ---
 
 **This image is meant to be used on a C1 server.**
