@@ -6,6 +6,10 @@ TITLE =			GitLab
 DESCRIPTION =		GitLab
 SOURCE_URL =		https://github.com/scaleway/image-app-gitlab
 
+IMAGE_VOLUME_SIZE =	150GB
+IMAGE_NAME =		GitLab
+IMAGE_BOOTSCRIPT =	stable
+
 
 ## Image tools  (https://github.com/scaleway/image-tools)
 all:	docker-rules.mk
