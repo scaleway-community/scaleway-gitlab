@@ -1,5 +1,4 @@
-DOCKER_NAMESPACE =	armbuild/
-NAME =			scw-app-gitlab
+NAME =			gitlab
 VERSION =		latest
 VERSION_ALIASES =	
 TITLE =			GitLab
