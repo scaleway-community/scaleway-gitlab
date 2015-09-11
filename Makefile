@@ -4,7 +4,7 @@ VERSION =		latest
 VERSION_ALIASES =	
 TITLE =			GitLab
 DESCRIPTION =		GitLab
-SOURCE_URL =		https://github.com/scaleway/image-app-gitlab
+SOURCE_URL =		https://github.com/scaleway-community/scaleway-gitlab
 
 IMAGE_VOLUME_SIZE =	150GB
 IMAGE_NAME =		GitLab
