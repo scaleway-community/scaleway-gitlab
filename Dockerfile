@@ -6,6 +6,9 @@ MAINTAINER Scaleway <opensource@scaleway.com> (@scaleway)
 # Prepare rootfs for image-builder
 RUN /usr/local/sbin/builder-enter
 
+# Pre-seeding for postfix
+RUN sudo su root -c "debconf-set-selections <<< \"postfix postfix/main_mailer_type string 'Internet Site'\"" \
+  && sudo su root -c "debconf-set-selections <<< \"postfix postfix/mailname string localhost\""
 
 # Install packages
 RUN curl -sL https://deb.nodesource.com/setup | sudo bash - \
