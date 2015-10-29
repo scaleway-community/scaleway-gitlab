@@ -23,9 +23,13 @@ RUN curl -o /etc/apt/sources.list.d/gitlab_ce.list "https://packages.gitlab.com/
   && apt-get -q update \
   && apt-get install gitlab-ce
 
-RUN echo "kernel.shmall = 262144" >> /etc/sysctl.conf
-RUN echo "kernel.shmmax = 1073741824" >> /etc/sysctl.conf
-
+# Tune sysctl
+RUN echo "kernel.shmall = 262144" >> /etc/sysctl.conf \
+ && echo "kernel.shmmax = 1073741824" >> /etc/sysctl.conf
+ 
+# Create missing directories
+RUN mkdir -p /var/opt/gitlab/backups \
+ && chown git backups /var/opt/gitlab/backups
 
 ADD ./patches/etc/ /etc/
 ADD ./patches/usr/sbin/ /usr/sbin/
