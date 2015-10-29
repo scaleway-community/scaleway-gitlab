@@ -29,7 +29,7 @@ RUN echo "kernel.shmall = 262144" >> /etc/sysctl.conf \
  
 # Create missing directories
 RUN mkdir -p /var/opt/gitlab/backups \
- && chown git backups /var/opt/gitlab/backups
+ && chown git /var/opt/gitlab/backups
 
 ADD ./patches/etc/ /etc/
 ADD ./patches/usr/sbin/ /usr/sbin/
