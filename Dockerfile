@@ -27,12 +27,8 @@ RUN curl -o /etc/apt/sources.list.d/gitlab_ce.list "https://packages.gitlab.com/
 RUN echo "kernel.shmall = 262144" >> /etc/sysctl.conf \
  && echo "kernel.shmmax = 1073741824" >> /etc/sysctl.conf
 
-# Create missing directories
-RUN mkdir -p /var/opt/gitlab/backups
-
 ADD ./patches/etc/ /etc/
 ADD ./patches/usr/sbin/ /usr/sbin/
-
 
 # Clean rootfs from image-builder
 RUN /usr/local/sbin/builder-leave
