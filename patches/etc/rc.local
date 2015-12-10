@@ -12,5 +12,6 @@
 # By default this script does nothing.
 
 /usr/sbin/gitlab-reconfigure &
+chown git /var/opt/gitlab/backups
 
 exit 0
