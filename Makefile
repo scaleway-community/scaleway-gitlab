@@ -4,6 +4,7 @@ VERSION_ALIASES =
 TITLE =			GitLab
 DESCRIPTION =		GitLab
 SOURCE_URL =		https://github.com/scaleway-community/scaleway-gitlab
+DEFAULT_IMAGE_ARCH =	x86_64
 
 IMAGE_VOLUME_SIZE =	150GB
 IMAGE_NAME =		GitLab
