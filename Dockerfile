@@ -1,34 +1,50 @@
 ## -*- docker-image-name: "scaleway/gitlab:latest" -*-
-FROM scaleway/ubuntu:trusty
+FROM scaleway/ruby:amd64-latest
+# following 'FROM' lines are used dynamically thanks do the image-builder
+# which dynamically update the Dockerfile if needed.
+#FROM scaleway/ruby:armhf-latest       # arch=armv7l
+#FROM scaleway/ruby:arm64-latest       # arch=arm64
+#FROM scaleway/ruby:i386-latest        # arch=i386
+#FROM scaleway/ruby:mips-latest        # arch=mips
+
+
 MAINTAINER Scaleway <opensource@scaleway.com> (@scaleway)
 
 
 # Prepare rootfs for image-builder
-RUN /usr/local/sbin/builder-enter
+RUN /usr/local/sbin/scw-builder-enter
 
-# Pre-seeding for postfix
-RUN sudo su root -c "debconf-set-selections <<< \"postfix postfix/main_mailer_type string 'Internet Site'\"" \
-  && sudo su root -c "debconf-set-selections <<< \"postfix postfix/mailname string localhost\""
 
-# Install packages
-RUN curl -sL https://deb.nodesource.com/setup | sudo bash - \
- && curl https://packages.gitlab.com/gpg.key | apt-key add - \
- && apt-get -q update                   \
- && apt-get --force-yes -y -qq upgrade  \
- && apt-get --force-yes install -y -q   \
-    curl openssh-server ca-certificates postfix apt-transport-https
+# Install deps
+RUN echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-selections  \
+ && echo "postfix postfix/mailname string localhost" | debconf-set-selections                \
+ && curl -sL https://deb.nodesource.com/setup | sudo bash -                                  \
+ && curl https://packages.gitlab.com/gpg.key | apt-key add -                                 \
+ && apt-get -q update                                                                        \
+ && apt-get --force-yes -y -qq upgrade                                                       \
+ && apt-get --force-yes install -y -q                                                        \
+        curl openssh-server ca-certificates postfix apt-transport-https                      \
+ && apt-get clean
+
 
 # Install gitlab
-RUN curl -o /etc/apt/sources.list.d/gitlab_ce.list "https://packages.gitlab.com/install/repositories/gitlab/raspberry-pi2/config_file.list?os=debian&dist=wheezy" \
-  && apt-get -q update \
-  && apt-get install gitlab-ce
+RUN case "${ARCH}" in                                                                                                     \
+  armv7l|armhf|arm)                                                                                                       \
+      curl -o /etc/apt/sources.list.d/gitlab_ce.list                                                                      \
+          "https://packages.gitlab.com/install/repositories/gitlab/raspberry-pi2/config_file.list?os=debian&dist=wheezy"  \
+      && apt-get -q update && apt-get install -y gitlab-ce;                                                               \
+    ;;                                                                                                                    \
+  amd64|x86_64|i386)                                                                                                      \
+      curl -o /etc/apt/sources.list.d/gitlab_ce.list                                                                      \
+          "https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/config_file.list?os=ubuntu&dist=trusty"      \
+      && apt-get -q update && apt-get install -y gitlab-ce;                                                               \
+    ;;                                                                                                                    \
+  *) echo "Unhandled architecture"; exit 1 ;;                                                                             \
+  esac
 
-# Tune sysctl
-RUN echo "kernel.shmall = 262144" >> /etc/sysctl.conf \
- && echo "kernel.shmmax = 1073741824" >> /etc/sysctl.conf
 
-ADD ./patches/etc/ /etc/
-ADD ./patches/usr/sbin/ /usr/sbin/
+COPY ./overlay/ /
+
 
 # Clean rootfs from image-builder
-RUN /usr/local/sbin/builder-leave
+RUN /usr/local/sbin/scw-builder-leave

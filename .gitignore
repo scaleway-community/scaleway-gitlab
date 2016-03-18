@@ -1,4 +1,6 @@
-.docker-container.built
+*.built
+tmp-*/
+.overlays
 docker-rules.mk
 *~
 .*~
