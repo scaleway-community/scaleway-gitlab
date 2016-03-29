@@ -1,27 +1,24 @@
-Official GitLab image on Scaleway
-=================================
+# Gitlab image on Scaleway
 
-Scripts to build the official GitLab image on Scaleway
+[![Build Status](https://travis-ci.org/scaleway-community/scaleway-gitlab.svg?branch=master)](https://travis-ci.org/scaleway-community/scaleway-gitlab)
+[![Scaleway ImageHub](https://img.shields.io/badge/ImageHub-view-ff69b4.svg)](https://hub.scaleway.com/gitlab.html)
+[![Run on Scaleway](https://img.shields.io/badge/Scaleway-run-69b4ff.svg)](https://cloud.scaleway.com/#/servers/new?image=233074b9-e2ba-4e78-818e-dd4930ce6bee)
 
-This image is built using [Image Tools](https://github.com/scaleway/image-tools) and depends on the official [Ubuntu](https://github.com/scaleway/image-ubuntu) image.
+Launch your Gitlab app on Scaleway servers in minutes.
 
-![](https://about.gitlab.com/images/press/logo/wm_no_bg.svg)
+
+<img src="https://about.gitlab.com/images/press/logo/wm_no_bg.svg" width="400px" />
 
 ---
 
-**This image is meant to be used on a C1 server.**
+## How to hack
+
+**This image is meant to be used on a Scaleway server.**
 
 We use the Docker's building system and convert it at the end to a disk image that will boot on real servers without Docker. Note that the image is still runnable as a Docker container for debug or for inheritance.
 
-[More info](https://github.com/scaleway/image-tools#docker-based-builder)
+[More info](https://github.com/scaleway/image-builder)
 
 ---
 
-Install
--------
-
-Build and write the image to /dev/nbd1 (see [documentation](https://www.scaleway.com/docs/create-an-image-with-docker))
-
-    $ make install
-
-Full list of commands available at: [scaleway/image-tools](https://github.com/scaleway/image-tools/tree/master#commands)
+A project by [![Scaleway](https://avatars1.githubusercontent.com/u/5185491?v=3&s=42)](https://www.scaleway.com/)
