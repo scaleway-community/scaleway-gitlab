@@ -11,6 +11,6 @@
 #
 # By default this script does nothing.
 
-/usr/sbin/gitlab-reconfigure &
+/usr/local/sbin/scw-gitlab-reconfigure &
 
 exit 0
