@@ -1,5 +1,6 @@
 #!/bin/bash
 sed -i "s/external_url '.*'/external_url 'http:\/\/$(/usr/local/bin/oc-metadata --cached ID).pub.cloud.scaleway.com'/g" /etc/gitlab/gitlab.rb
+apt-get install -y -q postgresql
 gitlab-ctl reconfigure &> /dev/null
 gitlab-ctl reconfigure &> /dev/null
 mkdir -p /var/opt/gitlab/backups
