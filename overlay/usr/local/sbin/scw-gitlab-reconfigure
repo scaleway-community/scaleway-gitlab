@@ -4,4 +4,4 @@ gitlab-ctl reconfigure &> /dev/null
 gitlab-ctl reconfigure &> /dev/null
 mkdir -p /var/opt/gitlab/backups
 chown git /var/opt/gitlab/backups
-sed -i s/gitlab-reconfigure.*//g /etc/rc.local
+sed -i 's/.*gitlab-reconfigure.*//g' /etc/rc.local
