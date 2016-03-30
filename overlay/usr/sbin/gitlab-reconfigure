@@ -1,7 +1,4 @@
 #!/bin/bash
 sed -i "s/external_url '.*'/external_url 'http:\/\/$(/usr/local/bin/oc-metadata --cached ID).pub.cloud.scaleway.com'/g" /etc/gitlab/gitlab.rb
-gitlab-ctl reconfigure &> /dev/null
-gitlab-ctl reconfigure &> /dev/null
-mkdir -p /var/opt/gitlab/backups
-chown git /var/opt/gitlab/backups
-sed -i s/gitlab-reconfigure.*//g /etc/rc.local
+gitlab-ctl reconfigure
+sed -i 's/.*gitlab-reconfigure.*//g' /etc/rc.local

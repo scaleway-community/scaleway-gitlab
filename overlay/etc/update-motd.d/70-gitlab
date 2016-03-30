@@ -1,7 +1,12 @@
 #!/bin/bash
 
 cat <<EOF
-To continue the installation, open http://$(/usr/local/bin/oc-metadata --cached PUBLIC_IP_ADDRESS)/ in your browser. Default login/password is root/5iveL!fe
-Getting started with GitLab on C1: https://www.scaleway.com/docs/how-to-use-the-gitlab-instant-apps.
+To continue the installation, open http://$(/usr/local/bin/scw-metadata --cached PUBLIC_IP_ADDRESS)/ in your browser.
+Getting started with GitLab: https://www.scaleway.com/docs/how-to-use-the-gitlab-instant-apps.
+
+With the version 8.5 of gitlab, the credentials are:
+ - root
+ - 5iveL!fe
+
 You can hide this message on the next connection by deleting the $0 file.
 EOF
