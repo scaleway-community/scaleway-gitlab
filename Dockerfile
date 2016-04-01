@@ -19,7 +19,7 @@ RUN /usr/local/sbin/scw-builder-enter
 RUN echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-selections  \
  && echo "postfix postfix/mailname string localhost" | debconf-set-selections                \
  && curl -Ls https://packages.gitlab.com/gpg.key | apt-key add -                             \
- && apt-get update                                                                           \ 
+ && apt-get update                                                                           \
  && apt-get --force-yes -y upgrade                                                           \
  && apt-get clean
 
@@ -35,8 +35,10 @@ RUN case "${ARCH}" in                                                           
   esac
 
 RUN apt-get -q update              \
- && apt-get install -y             \
-      gitlab-ce  \
+ && ( \
+     while :; do echo -n .; sleep 60; done & \
+     apt-get install -y gitlab-ce \
+    ) \
  && apt-get clean
 
 COPY ./overlay/ /
