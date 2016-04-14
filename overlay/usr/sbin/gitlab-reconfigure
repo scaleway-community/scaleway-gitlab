@@ -2,3 +2,4 @@
 sed -i "s/external_url '.*'/external_url 'http:\/\/$(/usr/local/bin/oc-metadata --cached ID).pub.cloud.scaleway.com'/g" /etc/gitlab/gitlab.rb
 gitlab-ctl reconfigure
 sed -i 's/.*gitlab-reconfigure.*//g' /etc/rc.local
+sed -i 's/debian/raspbian/g' /etc/apt/sources.list.d/gitlab_raspberry-pi2.list
