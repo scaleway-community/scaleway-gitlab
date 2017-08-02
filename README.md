@@ -9,6 +9,13 @@ Launch your Gitlab app on Scaleway servers in minutes.
 
 <img src="https://about.gitlab.com/images/press/logo/wm_no_bg.svg" width="400px" />
 
+# Quickstart
+
+Once your server is booted up, it will initialize gitlab, which might take a few minutes.
+You can run `scw-gitlab-init-status` to check the initialization status.
+
+You can then configure gitlab using the web interface at `http://your_server_ip/`.
+
 ---
 
 ## How to hack

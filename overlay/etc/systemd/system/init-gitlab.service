@@ -1,0 +1,12 @@
+[Unit]
+Description=initialize gitlab on first boot
+After=network.target
+Before=gitlab-runsvdir.service
+
+[Service]
+ExecStart=/usr/local/bin/scw-gitlab-init
+Type=simple
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

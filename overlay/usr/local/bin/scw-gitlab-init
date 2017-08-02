@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+id="$(/usr/local/bin/oc-metadata --cached ID)"
+sed -i "s|external_url '.*'|external_url 'http://${id}.pub.cloud.scaleway.com'|g" /etc/gitlab/gitlab.rb
+gitlab-ctl reconfigure
+
+systemctl disable init-gitlab

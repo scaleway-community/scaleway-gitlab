@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+set -e
+
+service_name='init-gitlab'
+
+fail () {
+    echo "$@" >&2
+    echo "see the output of journalctl -u ${service_name}" >&2
+    return 1
+}
+
+get_state() {
+    systemctl show --property=ActiveState "${service_name}" | cut -d = -f 2
+}
+
+config_done () {
+    cat <<EOF
+To continue the installation, open http://$(/usr/local/bin/scw-metadata --cached PUBLIC_IP_ADDRESS)/ in your browser.
+Getting started with GitLab: https://www.scaleway.com/docs/how-to-use-the-gitlab-instant-apps.
+EOF
+}
+
+is_ready () {
+    ! systemctl is-enabled ${service_name} 2>&1 > /dev/null
+}
+
+case "$(get_state)" in
+    'inactive') echo "Gitlab is already installed."; config_done ;;
+    'active'|'activating')
+	if ! is_ready; then
+	    (
+		echo "Please wait while gitlab is configuring..."
+		trap echo EXIT
+		while ! is_ready; do
+		    echo -n .
+		    sleep 1
+		done
+	    )
+	fi
+	config_done
+	;;
+    'failed') fail "gitlab failed configuring.";;
+    *) fail "unknown state." ;;
+esac
