@@ -1,11 +1,11 @@
 ## -*- docker-image-name: "scaleway/gitlab:latest" -*-
-FROM scaleway/debian:amd64-jessie
+FROM scaleway/debian:amd64-stretch
 # following 'FROM' lines are used dynamically thanks do the image-builder
 # which dynamically update the Dockerfile if needed.
-#FROM scaleway/debian:armhf-jessie       # arch=armv7l
-#FROM scaleway/debian:arm64-jessie       # arch=arm64
-#FROM scaleway/debian:i386-jessie        # arch=i386
-#FROM scaleway/debian:mips-jessie        # arch=mips
+#FROM scaleway/debian:armhf-stretch      # arch=armv7l
+#FROM scaleway/debian:arm64-stretch      # arch=arm64
+#FROM scaleway/debian:i386-stretch       # arch=i386
+#FROM scaleway/debian:mips-stretch       # arch=mips
 
 
 MAINTAINER Scaleway <opensource@scaleway.com> (@scaleway)
@@ -33,6 +33,10 @@ RUN case "${ARCH}" in                                                           
     ;;                                                                                                                                 \
   *) echo "Unhandled architecture"; exit 1 ;;                                                                                          \
   esac
+
+RUN case "${ARCH}" in armv7l|armhf|arm) \
+        sed -i s:stretch:jessie:g /etc/apt/sources.list.d/*gitlab*.list ;; \
+    esac
 
 RUN apt-get -q update              \
  && ( \
