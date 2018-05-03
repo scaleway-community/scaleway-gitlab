@@ -1,0 +1,10 @@
+[Unit]
+Description=Reconfigure Gitlab on first boot
+After=multi-user.target
+
+[Service]
+ExecStart=/usr/sbin/gitlab-reconfigure
+Type=oneshot
+
+[Install]
+WantedBy=multi-user.target

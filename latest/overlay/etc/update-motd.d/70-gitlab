@@ -1,6 +1,9 @@
 #!/bin/bash
 
 cat <<EOF
+Gitlab needs to reconfigure itself at first boot. Please wait until everything's done before continuing.
+You can check the status with this command: systemctl status init-gitlab
+
 To continue the installation, open http://$(/usr/local/bin/scw-metadata --cached PUBLIC_IP_ADDRESS)/ in your browser.
 Getting started with GitLab: https://www.scaleway.com/docs/how-to-use-the-gitlab-instant-apps.
 
